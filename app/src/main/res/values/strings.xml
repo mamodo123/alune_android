@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Alune</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_procurar">Procurar</string>
+    <string name="tipo_de_preco">"Qual o tipo do preço?"</string>
+
+    <string name="terms">"      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sodales lobortis diam, quis luctus sapien scelerisque sit amet. Aliquam ut turpis eget purus ultrices tristique eget eget augue. Ut lobortis, elit molestie vulputate dignissim, lacus turpis scelerisque elit, id eleifend eros arcu id erat. Cras pellentesque faucibus tristique. Integer sed lacinia ligula. Mauris in feugiat arcu, a viverra sapien. Mauris quis urna sed urna vulputate vestibulum in id elit. Aliquam erat volutpat. Curabitur suscipit scelerisque rhoncus. Sed nunc eros, vehicula nec luctus eget, laoreet ac augue. Sed hendrerit tellus ut nibh gravida fermentum. Nam tellus justo, hendrerit sed laoreet sed, euismod id lectus. Phasellus commodo dignissim lacus sit amet porttitor. Phasellus at metus sed neque porttitor euismod. Proin dictum ante nunc, at hendrerit ex volutpat non. Sed interdum eleifend lorem, auctor bibendum nulla imperdiet sit amet.
+
+        Phasellus orci magna, hendrerit ut lobortis a, venenatis a arcu. Phasellus quis nulla eu mi condimentum scelerisque. Nunc rutrum arcu ultrices quam laoreet tincidunt. Etiam sit amet placerat ligula. Integer lacinia turpis a massa maximus, a malesuada nisi lobortis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vestibulum rutrum ipsum id purus posuere, sit amet consequat arcu sodales. Praesent ut ante eget augue dictum lobortis.
+
+        Sed vestibulum auctor metus, sit amet tincidunt justo molestie tristique. Sed eget sollicitudin erat. Nunc sollicitudin nec leo feugiat ullamcorper. Duis sodales pretium volutpat. Proin sodales risus eget leo aliquam, sed lobortis turpis dapibus. Etiam tincidunt augue nulla, in fringilla mi facilisis at. Phasellus porttitor purus felis, eget interdum metus iaculis sit amet. Mauris porta diam nec mi euismod, in scelerisque sapien gravida. Integer ut rhoncus elit, vel feugiat nisl. Praesent consectetur turpis auctor est maximus aliquam. Fusce sit amet odio feugiat sem pellentesque consequat. Curabitur rhoncus augue non bibendum dictum. Aenean sodales tortor nec nunc faucibus placerat. Nunc vel ornare libero, ut eleifend purus."
+    </string>
+
+    <!-- Facebook -->
+    <string name="facebook_app_id">819903905047487</string>
+    <string name="fb_login_protocol_scheme">fb819903905047487</string>
+
+</resources>

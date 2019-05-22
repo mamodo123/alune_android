@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:text="Termos de uso"
+        android:textSize="40dp"
+        android:layout_gravity="center_horizontal|bottom"/>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.bluejamesbond.text.DocumentView xmlns:ext="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/tv_termoss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                ext:documentView_text="@string/terms"
+                ext:documentView_textAlignment="justified"
+                ext:documentView_textColor="#000" />
+
+            <TextView
+                android:id="@+id/tv_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="Ok"
+                android:textSize="30dp"
+                android:layout_gravity="center_horizontal|bottom"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

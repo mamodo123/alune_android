@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "664432339598",
+    "firebase_url": "https://mimti-229fd.firebaseio.com",
+    "project_id": "mimti-229fd",
+    "storage_bucket": "mimti-229fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:664432339598:android:d5cbeef8ee6f8f9f",
+        "android_client_info": {
+          "package_name": "br.com.tibalt.tibalt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "664432339598-fr73cpojcpc1r2ehc963ra4qe0jeka2v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.tibalt.tibalt",
+            "certificate_hash": "063ceff6df6c4d957d8de93afa91d6457cc3a9b3"
+          }
+        },
+        {
+          "client_id": "664432339598-iefb1oj1j09e0p11pms93a24hj0fl7dk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4ZxrUrpqKU6wYHja_iNrD9NjTbFl4Nj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "664432339598-iefb1oj1j09e0p11pms93a24hj0fl7dk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

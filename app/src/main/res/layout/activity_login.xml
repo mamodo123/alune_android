@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".menu.login.Login"
+    android:background="@color/colorAccent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/llAlune"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alune"
+                android:textSize="40dp"
+                android:textColor="#fff"
+                android:fontFamily="@font/maturasc"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/ic_logo_rounded"
+            android:layout_below="@id/llAlune"/>
+
+        <EditText
+            android:id="@+id/matricula"
+            android:layout_below="@id/logo"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Matrícula"
+            android:maxLength="8"
+            android:inputType="number"
+            android:background="@drawable/edit_border"
+            android:padding="6dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"/>
+
+        <EditText
+            android:id="@+id/senha"
+            android:layout_below="@id/matricula"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Senha"
+            android:inputType="textPassword"
+            android:background="@drawable/edit_border"
+            android:padding="6dp"/>
+
+        <Button
+            android:id="@+id/login"
+            android:layout_below="@id/senha"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:text="Entrar"
+            android:textColor="#fff"
+            android:textAllCaps="false"
+            android:background="@drawable/rounded_button_primary" />
+
+        <LinearLayout
+            android:id="@+id/ll_recuperar_naoAluno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/login"
+            android:layout_marginTop="30dp"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/recuperar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recuperar senha"
+                android:layout_marginEnd="20dp"/>
+
+            <TextView
+                android:id="@+id/naoAluno"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Não sou aluno" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_registrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_recuperar_naoAluno"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ainda não é cadastrado? " />
+
+            <TextView
+                android:id="@+id/registrar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alune-se"
+                android:textColor="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/bt_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ll_registrar"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"/>
+
+        </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/pBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+</FrameLayout>

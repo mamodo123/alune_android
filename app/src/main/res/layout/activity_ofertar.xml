@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".menu.ofertaProcura.abas.publicar.Ofertar">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvOfertarNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Título da oferta" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tlNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvOfertarNome"
+            android:layout_marginBottom="20dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="40">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/etOfertarNome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="20"
+                android:inputType="textCapSentences"
+                android:maxLength="40"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvOfertarDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tlNome"
+            android:text="Descrição da oferta:" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/tlOfertarDescrição"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvOfertarDescricao"
+
+            android:layout_marginBottom="20dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="200">
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etOfertarDescrição"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="20"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLength="200" />
+        </android.support.design.widget.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvOfertarImagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tlOfertarDescrição"
+            android:text="Imagens:"
+            android:layout_marginBottom="10dp"/>
+
+
+        <LinearLayout
+            android:id="@+id/llImagens"
+            android:layout_below="@+id/tvOfertarImagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <ImageView
+                android:id="@+id/ivImagem1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                android:onClick="getFoto"
+                app:srcCompat="@drawable/plus"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <ImageView
+                android:id="@+id/ivImagem2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                android:onClick="getFoto"
+                app:srcCompat="@drawable/plus"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"/>
+
+            <ImageView
+                android:id="@+id/ivImagem3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="100dp"
+                android:onClick="getFoto"
+                app:srcCompat="@drawable/plus"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPreco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Qual o preço?"
+            android:layout_below="@+id/llImagens"/>
+
+        <LinearLayout
+            android:id="@+id/llPrecos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@+id/tvPreco"
+            android:layout_marginBottom="20dp">
+
+            <Spinner
+                android:id="@+id/spPreço"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
+                android:prompt="@string/tipo_de_preco"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etPrecoFixo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:hint="ex: 18,00"/>
+
+                <EditText
+                    android:id="@+id/etPrecoFixo2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:inputType="number" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_below="@+id/llPrecos">
+
+            <Button
+                android:id="@+id/btPreview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Visualizar"
+                android:layout_marginRight="10dp"/>
+
+            <Button
+                android:id="@+id/btEnviar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Enviar"
+                android:onClick="enviar"/>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
