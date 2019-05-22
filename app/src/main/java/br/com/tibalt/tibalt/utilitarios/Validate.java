@@ -10,6 +10,10 @@ public class Validate {
         return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 
+    public static boolean isMatricula(String matricula) {
+        return matricula.matches("[0-9]{8}");
+    }
+
     public static boolean isCPF(String CPF) {
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (CPF.equals("00000000000") ||

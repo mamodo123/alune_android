@@ -1,12 +1,9 @@
 package br.com.tibalt.tibalt.menu.login;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -27,19 +24,19 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.json.JSONException;
 
-import java.util.Arrays;
 import java.util.Map;
 
 import br.com.tibalt.tibalt.MainActivity;
 import br.com.tibalt.tibalt.R;
-import br.com.tibalt.tibalt.menu.MenuGeral;
+import br.com.tibalt.tibalt.menu.login.registrar.Register_1;
 import br.com.tibalt.tibalt.menu.login.registrar.Registrar_1_email_or_external;
 import br.com.tibalt.tibalt.utilitarios.DbCollections;
+import br.com.tibalt.tibalt.utilitarios.Validate;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,8 +45,8 @@ public class Login extends AppCompatActivity {
 
     @BindView(R.id.bt_facebook)
     LoginButton bt_facebook;
-    @BindView(R.id.matricula)
-    EditText matricula;
+    @BindView(R.id.login)
+    EditText login;
     @BindView(R.id.senha)
     EditText senha;
 
@@ -63,6 +60,10 @@ public class Login extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        facebook_logout();
+
+        mAuth = FirebaseAuth.getInstance();
+
         setFbAction();
     }
 
@@ -72,7 +73,48 @@ public class Login extends AppCompatActivity {
         bt_facebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                handleFacebookAccessToken(loginResult.getAccessToken());
+                GraphRequest request = GraphRequest.newMeRequest(
+                        loginResult.getAccessToken(), (object, response) -> {
+                            try {
+                                String id = object.getString("id");
+                                String email = object.getString("email");
+                                String name = object.getString("name");
+                                String picture = "https://graph.facebook.com/" + id + "/picture?type=large";
+
+                                mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                                        if (task.isSuccessful()) {
+                                            if (task.getResult().getSignInMethods().isEmpty()) {
+                                                findViewById(R.id.pBar).setVisibility(View.GONE);
+                                                Bundle bundle = new Bundle();
+                                                bundle.putBoolean("facebook", true);
+                                                bundle.putString("email", email);
+                                                bundle.putString("name", name);
+                                                bundle.putString("picture", picture);
+                                                Intent intent = new Intent(Login.this, Register_1.class);
+                                                intent.putExtras(bundle);
+                                                startActivity(intent);
+                                            } else {
+                                                if (task.getResult().getSignInMethods().contains("facebook.com")){
+                                                    handleFacebookAccessToken(loginResult.getAccessToken());
+                                                } else {
+                                                    facebook_logout();
+                                                    Toast.makeText(Login.this, "Este Facebook não esta conectado à conta com este email.", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }
+                                    }
+                                });
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id, email, name");
+                request.setParameters(parameters);
+                request.executeAsync();
             }
 
             @Override
@@ -88,11 +130,8 @@ public class Login extends AppCompatActivity {
 
     private void handleFacebookAccessToken(AccessToken token) {
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                .addOnCompleteListener(this, (task) -> {
                         if (task.isSuccessful()) {
                             Intent intent = new Intent(Login.this, MainActivity.class);
                             startActivity(intent);
@@ -102,7 +141,6 @@ public class Login extends AppCompatActivity {
                             facebook_logout();
                         }
 
-                    }
                 });
     }
 
@@ -111,11 +149,11 @@ public class Login extends AppCompatActivity {
         db.collection(DbCollections.COLLECTIONS_LOGIN).document("registration")
                 .get().addOnSuccessListener((result) -> {
                     Map<String, Object> map = result.getData();
-                    String email = (String) map.get(matricula.getText().toString());
+            String email = (String) map.get(login.getText().toString());
                     if (email != null) {
                         loginEmail(email);
                     } else {
-                        matricula.setError("Matrícula não registrada.");
+                        login.setError("Matrícula não registrada.");
                         findViewById(R.id.pBar).setVisibility(View.GONE);
                         senha.setText("");
                     }
@@ -129,8 +167,6 @@ public class Login extends AppCompatActivity {
 
     private void loginEmail(String email) {
         String password = senha.getText().toString();
-
-        mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -148,25 +184,41 @@ public class Login extends AppCompatActivity {
                 });
     }
 
-    @OnClick(R.id.login)
+    @OnClick(R.id.bt_login)
     public void login() {
-        boolean error = false;
+        boolean error = true;
 
-        if (matricula.getText().toString().length() < 8 || !validateMatricula()) {
-            matricula.setError("Matrícula inválida");
-            error = true;
+        String login_text = login.getText().toString();
+        int system_login = 0;
+
+        if (Validate.isValidEmailAddress(login_text)) {
+            error = false;
+            system_login = 1;
+        } else if (Validate.isMatricula(login_text)) {
+            error = false;
+            system_login = 2;
+        } else {
+            login.setError("Login inválido.");
         }
 
         if (!validatePass()) {
-            senha.setError("Senha inválida");
+            senha.setError("Senha inválida.");
             error = true;
         }
 
         if (!error) {
             findViewById(R.id.pBar).setVisibility(View.VISIBLE);
-            validate();
+            switch (system_login) {
+                case 1:
+                    loginEmail(login_text);
+                    break;
+                case 2:
+                    validate();
+                    break;
+                default:
+                    break;
+            }
         }
-
     }
 
     @Override
@@ -175,19 +227,10 @@ public class Login extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @OnClick(R.id.naoAluno)
-    public void naoAluno() {
-
-    }
-
     @OnClick(R.id.registrar)
     public void registrar() {
-        Intent intent = new Intent(this, Registrar_1_email_or_external.class);
+        Intent intent = new Intent(this, Register_1.class);
         startActivity(intent);
-    }
-
-    private boolean validateMatricula() {
-        return true;
     }
 
     private boolean validatePass() {
