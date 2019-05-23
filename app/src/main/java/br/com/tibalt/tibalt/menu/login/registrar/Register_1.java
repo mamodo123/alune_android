@@ -168,10 +168,9 @@ public class Register_1 extends AppCompatActivity {
             public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
                 if (task.isSuccessful()) {
                     if (task.getResult().getSignInMethods().isEmpty()) {
-                        //TODO
-                        // Intent intent = new Intent(Register_1.class, Register_2.class);
-                        // intent.putExtras(bundle);
-                        // startActivity(intent);
+                         Intent intent = new Intent(Register_1.this, Register_2.class);
+                         intent.putExtras(bundle);
+                         startActivity(intent);
                     } else {
                        ed_email.setError("Este email já esta associado à uma conta!");
                     }
