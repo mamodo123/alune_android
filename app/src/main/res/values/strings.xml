@@ -19,4 +19,8 @@
     <string name="facebook_app_id">819903905047487</string>
     <string name="fb_login_protocol_scheme">fb819903905047487</string>
 
+    <string name="invalid_name">Nome inválido!</string>
+    <string name="acept_terms">Você deve aceitar os termos de uso!</string>
+    <string name="terms_of_use">Termos de uso</string>
+
 </resources>

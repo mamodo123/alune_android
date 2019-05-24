@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:664432339598:android:d5cbeef8ee6f8f9f",
+        "mobilesdk_app_id": "1:664432339598:android:68a65f466d7c7b98",
         "android_client_info": {
-          "package_name": "br.com.tibalt.tibalt"
+          "package_name": "br.com.tibalt.alune"
         }
       },
       "oauth_client": [
         {
-          "client_id": "664432339598-fr73cpojcpc1r2ehc963ra4qe0jeka2v.apps.googleusercontent.com",
+          "client_id": "664432339598-51gdg65rdf87999ckd46mn81c6q5sb6t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "br.com.tibalt.tibalt",
+            "package_name": "br.com.tibalt.alune",
             "certificate_hash": "063ceff6df6c4d957d8de93afa91d6457cc3a9b3"
           }
         },
