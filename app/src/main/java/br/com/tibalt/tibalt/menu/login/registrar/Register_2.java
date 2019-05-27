@@ -3,11 +3,9 @@ package br.com.tibalt.tibalt.menu.login.registrar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -21,11 +19,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.facebook.AccessToken;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -120,44 +115,35 @@ public class Register_2 extends AppCompatActivity {
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        pbar.setVisibility(View.GONE);
-                        if (task.isSuccessful()) {
-                            String name = et_name.getText().toString();
-                            if (facebook) {
-                                AuthCredential credential = FacebookAuthProvider.getCredential(AccessToken.getCurrentAccessToken().getToken());
-                                mAuth.getCurrentUser().linkWithCredential(credential)
-                                        .addOnCompleteListener(Register_2.this, new OnCompleteListener<AuthResult>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                                if (task.isSuccessful()) {
-                                                    runOnUiThread(() -> updateuser(name, email, db, mAuth));
-                                                    Intent intent = new Intent(Register_2.this, MainActivity.class);
-                                                    startActivity(intent);
-                                                } else {
-                                                    new AlertDialog.Builder(Register_2.this)
-                                                            .setTitle("Atenção!")
-                                                            .setMessage("Esta conta do Facebook está vinculada à outra conta. Sua conta foi vinculada ao seu email.\nCaso deseje vincular ao Facebook, você poderá em seu perfil.")
-                                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                                                public void onClick(DialogInterface dialog, int which) {
-                                                                    dialog.dismiss();
-                                                                    runOnUiThread(() -> updateuser(name, email, db, mAuth));
-                                                                    Intent intent = new Intent(Register_2.this, MainActivity.class);
-                                                                    startActivity(intent);
-                                                                }
-                                                            })
-                                                            .show();
-                                                }
-                                            }
-
-                                        });
-                            } else {
-                                runOnUiThread(() -> updateuser(name, email, db, mAuth));
-                                Intent intent = new Intent(Register_2.this, MainActivity.class);
-                                startActivity(intent);
-                            }
+                .addOnCompleteListener(this, task -> {
+                    pbar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        String name = et_name.getText().toString();
+                        if (facebook) {
+                            AuthCredential credential = FacebookAuthProvider.getCredential(AccessToken.getCurrentAccessToken().getToken());
+                            mAuth.getCurrentUser().linkWithCredential(credential)
+                                    .addOnCompleteListener(Register_2.this, task1 -> {
+                                        if (task1.isSuccessful()) {
+                                            runOnUiThread(() -> updateuser(name, email, db, mAuth));
+                                            Intent intent = new Intent(Register_2.this, MainActivity.class);
+                                            startActivity(intent);
+                                        } else {
+                                            new AlertDialog.Builder(Register_2.this)
+                                                    .setTitle("Atenção!")
+                                                    .setMessage("Esta conta do Facebook está vinculada à outra conta. Sua conta será vinculada ao seu email.\nCaso deseje vincular ao Facebook, você poderá em seu perfil.")
+                                                    .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                                                        dialog.dismiss();
+                                                        runOnUiThread(() -> updateuser(name, email, db, mAuth));
+                                                        Intent intent = new Intent(Register_2.this, MainActivity.class);
+                                                        startActivity(intent);
+                                                    })
+                                                    .show();
+                                        }
+                                    });
+                        } else {
+                            runOnUiThread(() -> updateuser(name, email, db, mAuth));
+                            Intent intent = new Intent(Register_2.this, MainActivity.class);
+                            startActivity(intent);
                         }
                     }
                 });
