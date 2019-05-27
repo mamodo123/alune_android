@@ -1,6 +1,5 @@
 package br.com.tibalt.tibalt.menu;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,24 +14,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import br.com.tibalt.tibalt.MainActivity;
+import br.com.tibalt.tibalt.Models.User;
 import br.com.tibalt.tibalt.R;
 import br.com.tibalt.tibalt.menu.comoFunciona.FragComoFunciona;
-import br.com.tibalt.tibalt.menu.login.Login;
 import br.com.tibalt.tibalt.menu.ofertaProcura.FragAbas;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MenuGeral extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
+    @BindView(R.id.drawerLayout)
+    DrawerLayout mDrawerLayout;
+    @BindView(R.id.menuLateral)
+    NavigationView menuLateral;
+
     private ActionBarDrawerToggle mToggle;
 
     private static final int TIME_DELAY = 2000;
@@ -46,18 +58,41 @@ public class MenuGeral extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicial);
 
+        ButterKnife.bind(this);
+
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
         Log.d("userUid", user.getUid());
 
+        getUserNav();
         setMenu();
         setFragOnMenu();
         setInicial();
     }
 
+    private void getUserNav() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("users").document(user.getUid());
+        docRef.get().addOnSuccessListener((documentSnapshot) -> {
+            User us = documentSnapshot.toObject(User.class);
+            View header = menuLateral.getHeaderView(0);
+
+            String photo = us.getPhoto();
+            String name = us.getName();
+            String email = us.getEmail();
+
+            if (photo != null) {
+                Glide.with(this).load(photo).diskCacheStrategy(DiskCacheStrategy.RESOURCE).apply(RequestOptions.circleCropTransform()).into((ImageView) header.findViewById(R.id.iv_profile));
+                header.findViewById(R.id.fl_picture).setBackgroundResource(R.drawable.photo_circle);
+            }
+            ((TextView)header.findViewById(R.id.tv_name)).setText(name);
+            ((TextView)header.findViewById(R.id.tv_email)).setText(email);
+
+        });
+    }
+
     private void setMenu() {
-        mDrawerLayout = findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
 
         mDrawerLayout.addDrawerListener(mToggle);
@@ -70,7 +105,6 @@ public class MenuGeral extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.relativeContainer, new FragAbas()).commit();
-        NavigationView menuLateral = findViewById(R.id.menuLateral);
         //menuLateral.getMenu().getItem(0).setChecked(true);
         menuLateral.setCheckedItem(R.id.nav_pag_inicial);
     }

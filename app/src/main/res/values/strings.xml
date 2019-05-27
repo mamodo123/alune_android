@@ -22,5 +22,7 @@
     <string name="invalid_name">Nome inválido!</string>
     <string name="acept_terms">Você deve aceitar os termos de uso!</string>
     <string name="terms_of_use">Termos de uso</string>
+    <string name="name">Nome</string>
+    <string name="email">Email</string>
 
 </resources>
