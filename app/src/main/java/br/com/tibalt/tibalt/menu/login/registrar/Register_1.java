@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -26,7 +27,6 @@ import com.google.firebase.auth.SignInMethodQueryResult;
 import org.json.JSONException;
 
 import br.com.tibalt.tibalt.R;
-import br.com.tibalt.tibalt.menu.login.Login;
 import br.com.tibalt.tibalt.utilitarios.Validate;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,6 +42,8 @@ public class Register_1 extends AppCompatActivity {
     EditText ed_senha2;
     @BindView(R.id.bt_facebook)
     LoginButton bt_facebook;
+    @BindView(R.id.pbar)
+    ProgressBar pbar;
 
     Boolean facebook;
     Bundle bundle;
@@ -81,6 +83,7 @@ public class Register_1 extends AppCompatActivity {
         bt_facebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                pbar.setVisibility(View.VISIBLE);
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), (object, response) -> {
                             try {
@@ -92,6 +95,7 @@ public class Register_1 extends AppCompatActivity {
                                 mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                                        pbar.setVisibility(View.GONE);
                                         if (task.isSuccessful()) {
                                             if (task.getResult().getSignInMethods().isEmpty()) {
                                                 bundle = new Bundle();
@@ -162,13 +166,17 @@ public class Register_1 extends AppCompatActivity {
     }
 
     private void validate() {
+        pbar.setVisibility(View.VISIBLE);
         String email = ed_email.getText().toString();
         mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
             @Override
             public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                pbar.setVisibility(View.GONE);
                 if (task.isSuccessful()) {
                     if (task.getResult().getSignInMethods().isEmpty()) {
                          Intent intent = new Intent(Register_1.this, Register_2.class);
+                        bundle.putString("senha", ed_senha.getText().toString());
+                        bundle.putString("email", ed_email.getText().toString());
                          intent.putExtras(bundle);
                          startActivity(intent);
                     } else {
