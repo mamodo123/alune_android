@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -47,6 +48,8 @@ public class Login extends AppCompatActivity {
     EditText login;
     @BindView(R.id.senha)
     EditText senha;
+    @BindView(R.id.pbar)
+    ProgressBar pbar;
 
     CallbackManager callbackManager;
     private FirebaseAuth mAuth;
@@ -71,6 +74,7 @@ public class Login extends AppCompatActivity {
         bt_facebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                pbar.setVisibility(View.VISIBLE);
                 GraphRequest request = GraphRequest.newMeRequest(
                         loginResult.getAccessToken(), (object, response) -> {
                             try {
@@ -82,9 +86,10 @@ public class Login extends AppCompatActivity {
                                 mAuth.fetchSignInMethodsForEmail(email).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                                        pbar.setVisibility(View.GONE);
                                         if (task.isSuccessful()) {
                                             if (task.getResult().getSignInMethods().isEmpty()) {
-                                                findViewById(R.id.pBar).setVisibility(View.GONE);
+                                                pbar.setVisibility(View.GONE);
                                                 Bundle bundle = new Bundle();
                                                 bundle.putBoolean("facebook", true);
                                                 bundle.putString("email", email);
@@ -135,7 +140,7 @@ public class Login extends AppCompatActivity {
                             startActivity(intent);
                         } else {
                             Toast.makeText(Login.this, "Conta não registrada.", Toast.LENGTH_SHORT).show();
-                            findViewById(R.id.pBar).setVisibility(View.GONE);
+                            pbar.setVisibility(View.GONE);
                             facebook_logout();
                         }
 
@@ -152,12 +157,12 @@ public class Login extends AppCompatActivity {
                         loginEmail(email);
                     } else {
                         login.setError("Matrícula não registrada.");
-                        findViewById(R.id.pBar).setVisibility(View.GONE);
+                        pbar.setVisibility(View.GONE);
                         senha.setText("");
                     }
         }).addOnFailureListener((listener) -> {
             Toast.makeText(this, "Erro de conexão", Toast.LENGTH_SHORT).show();
-            findViewById(R.id.pBar).setVisibility(View.GONE);
+            pbar.setVisibility(View.GONE);
             senha.setText("");
         });
 
@@ -174,7 +179,7 @@ public class Login extends AppCompatActivity {
                             startActivity(intent);
                         } else {
                             Toast.makeText(Login.this, "Senha e/ou Login incorretos.", Toast.LENGTH_SHORT).show();
-                            findViewById(R.id.pBar).setVisibility(View.GONE);
+                            pbar.setVisibility(View.GONE);
                             facebook_logout();
                             senha.setText("");
                         }
@@ -205,7 +210,7 @@ public class Login extends AppCompatActivity {
         }
 
         if (!error) {
-            findViewById(R.id.pBar).setVisibility(View.VISIBLE);
+            pbar.setVisibility(View.VISIBLE);
             switch (system_login) {
                 case 1:
                     loginEmail(login_text);

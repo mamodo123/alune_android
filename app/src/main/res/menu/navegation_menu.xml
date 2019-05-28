@@ -11,10 +11,6 @@
             android:title="Como funciona">
         </item>
 
-        <item android:id="@+id/nav_perfil"
-            android:title="Meu perfil">
-        </item>
-
         <item android:id="@+id/nav_dados_pessoais"
             android:title="Dados pessoais">
         </item>

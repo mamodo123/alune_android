@@ -126,10 +126,6 @@ public class MenuGeral extends AppCompatActivity {
                         fr = new FragComoFunciona();
                         break;
 
-                    case R.id.nav_perfil:
-                        fr = null;
-                        break;
-
                     case R.id.nav_dados_pessoais:
                         fr = null;
                         break;
