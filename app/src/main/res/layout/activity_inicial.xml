@@ -2,17 +2,19 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menu.MenuGeral"
-    android:id="@+id/drawerLayout">
+    tools:context=".menu.MenuGeral">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
+            android:id="@+id/relativeContainer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/relativeContainer">
+            android:layout_height="match_parent">
 
         </RelativeLayout>
 
@@ -21,16 +23,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </FrameLayout>
 
 
     <android.support.design.widget.NavigationView
+        android:id="@+id/menuLateral"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:menu="@menu/navegation_menu"
         android:layout_gravity="start"
-        android:id="@+id/menuLateral"
-        app:headerLayout="@layout/nav_header"/>
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/navegation_menu" />
 
 </android.support.v4.widget.DrawerLayout>

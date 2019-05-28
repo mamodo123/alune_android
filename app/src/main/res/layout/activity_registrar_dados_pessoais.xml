@@ -20,8 +20,8 @@
                 android:id="@+id/fl_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp">
 
                 <ImageView
                     android:id="@+id/riv_photo"
@@ -33,11 +33,11 @@
                     android:id="@+id/riv_mini_photo"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    app:srcCompat="@drawable/ic_photo"
                     android:layout_marginStart="107dp"
                     android:layout_marginTop="107dp"
                     android:background="@drawable/circle"
-                    android:padding="10dp"/>
+                    android:padding="10dp"
+                    app:srcCompat="@drawable/ic_photo" />
 
             </FrameLayout>
 
@@ -53,21 +53,21 @@
 
                     <TextView
                         android:layout_width="50dp"
-                        android:layout_weight="0"
                         android:layout_height="wrap_content"
-                        android:text="Nome:"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="10dp"/>
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0"
+                        android:text="Nome:" />
 
                     <EditText
                         android:id="@+id/et_name"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="textCapWords|textPersonName"
-                        android:hint="João da silva"/>
+                        android:hint="João da silva"
+                        android:inputType="textCapWords|textPersonName" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -77,21 +77,21 @@
 
                     <TextView
                         android:layout_width="50dp"
-                        android:layout_weight="0"
                         android:layout_height="wrap_content"
-                        android:text="Email:"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="10dp"/>
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0"
+                        android:text="Email:" />
 
                     <EditText
                         android:id="@+id/et_email"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="textEmailAddress"
-                        android:hint="example@example.com" />
+                        android:hint="example@example.com"
+                        android:inputType="textEmailAddress" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -101,22 +101,22 @@
 
                     <TextView
                         android:layout_width="50dp"
-                        android:layout_weight="0"
                         android:layout_height="wrap_content"
-                        android:text="CPF:"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="10dp"/>
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0"
+                        android:text="CPF:" />
 
                     <br.com.sapereaude.maskedEditText.MaskedEditText
                         android:id="@+id/et_cpf"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:layout_weight="1"
                         android:ems="10"
+                        android:hint="12345678901"
                         android:inputType="number"
-                        app:mask="###.###.###-##"
-                        android:hint="12345678901"/>
+                        app:mask="###.###.###-##" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -126,52 +126,54 @@
 
                     <TextView
                         android:layout_width="50dp"
-                        android:layout_weight="0"
                         android:layout_height="wrap_content"
-                        android:text="Celular:"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginEnd="10dp"/>
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0"
+                        android:text="Celular:" />
 
                     <br.com.sapereaude.maskedEditText.MaskedEditText
                         android:id="@+id/et_cel"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:layout_weight="1"
                         android:ems="10"
+                        android:hint="48998117371"
                         android:inputType="number"
-                        app:mask="+55(##) #####-####"
-                        android:hint="48998117371"/>
+                        app:mask="+55(##) #####-####" />
 
                     <EditText
                         android:id="@+id/et_estrangeiro"
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
+                        android:layout_weight="1"
                         android:ems="10"
+                        android:hint="Número estrangeiro"
                         android:inputType="phone"
-                        android:visibility="gone"
-                        android:hint="Número estrangeiro"/>
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/tv_estrangeiro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Meu número é estrangeiro"
-                    android:layout_marginStart="60dp"/>
+                    android:layout_marginStart="60dp"
+                    android:text="Meu número é estrangeiro" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:layout_gravity="center">
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp">
+
                     <CheckBox
                         android:id="@+id/cb_terms"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Eu li e concordo com os "/>
+                        android:text="Eu li e concordo com os " />
+
                     <TextView
                         android:id="@+id/tv_terms"
                         android:layout_width="wrap_content"

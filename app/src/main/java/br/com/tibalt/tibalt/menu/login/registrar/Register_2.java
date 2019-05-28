@@ -35,6 +35,7 @@ import java.util.HashMap;
 import br.com.tibalt.tibalt.MainActivity;
 import br.com.tibalt.tibalt.R;
 import br.com.tibalt.tibalt.utilitarios.FirebaseUpdate;
+import br.com.tibalt.tibalt.utilitarios.SharedPref;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -156,10 +157,13 @@ public class Register_2 extends AppCompatActivity {
         HashMap<Object, String> userInfo = new HashMap<>();
         userInfo.put("name", name);
         userInfo.put("email", email);
+        SharedPref.save(getApplicationContext(), "alune", "name", name);
+        SharedPref.save(getApplicationContext(), "alune", "email", email);
 
         if (photo != null) {
             if (facebook && face_foto) {
                 userInfo.put("photo", photo.toString());
+                SharedPref.save(getApplicationContext(), "alune", "photo", photo.toString());
                 FirebaseUpdate.updateUser(userInfo);
             } else {
                 storage.getReference().child("user_photo/" + user.getUid()).putFile(photo).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -169,6 +173,7 @@ public class Register_2 extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 userInfo.put("photo", uri.toString());
+                                SharedPref.save(getApplicationContext(), "alune", "photo", uri.toString());
                                 FirebaseUpdate.updateUser(userInfo);
                             }
                         });

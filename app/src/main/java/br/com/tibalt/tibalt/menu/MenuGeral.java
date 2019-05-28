@@ -35,6 +35,7 @@ import br.com.tibalt.tibalt.Models.User;
 import br.com.tibalt.tibalt.R;
 import br.com.tibalt.tibalt.menu.comoFunciona.FragComoFunciona;
 import br.com.tibalt.tibalt.menu.ofertaProcura.FragAbas;
+import br.com.tibalt.tibalt.utilitarios.SharedPref;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -72,11 +73,23 @@ public class MenuGeral extends AppCompatActivity {
     }
 
     private void getUserNav() {
+        //cache
+        String photoPref = SharedPref.readString(getApplicationContext(), "alune", "photo");
+        View header = menuLateral.getHeaderView(0);
+        if (photoPref != null) {
+            Glide.with(this).load(photoPref).diskCacheStrategy(DiskCacheStrategy.RESOURCE).apply(RequestOptions.circleCropTransform()).into((ImageView) header.findViewById(R.id.iv_profile));
+            header.findViewById(R.id.fl_picture).setBackgroundResource(R.drawable.photo_circle);
+        }
+        String namePref = SharedPref.readString(getApplicationContext(), "alune", "name");
+        String emailPref = SharedPref.readString(getApplicationContext(), "alune", "email");
+        ((TextView)header.findViewById(R.id.tv_name)).setText(namePref);
+        ((TextView)header.findViewById(R.id.tv_email)).setText(emailPref);
+        //
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("users").document(user.getUid());
         docRef.get().addOnSuccessListener((documentSnapshot) -> {
             User us = documentSnapshot.toObject(User.class);
-            View header = menuLateral.getHeaderView(0);
 
             String photo = us.getPhoto();
             String name = us.getName();
@@ -85,7 +98,10 @@ public class MenuGeral extends AppCompatActivity {
             if (photo != null) {
                 Glide.with(this).load(photo).diskCacheStrategy(DiskCacheStrategy.RESOURCE).apply(RequestOptions.circleCropTransform()).into((ImageView) header.findViewById(R.id.iv_profile));
                 header.findViewById(R.id.fl_picture).setBackgroundResource(R.drawable.photo_circle);
+                SharedPref.save(getApplicationContext(), "alune", "photo", photo);
             }
+            SharedPref.save(getApplicationContext(), "alune", "name", name);
+            SharedPref.save(getApplicationContext(), "alune", "email", email);
             ((TextView)header.findViewById(R.id.tv_name)).setText(name);
             ((TextView)header.findViewById(R.id.tv_email)).setText(email);
 
@@ -168,6 +184,8 @@ public class MenuGeral extends AppCompatActivity {
         //Facebook logout
         LoginManager.getInstance().logOut();
         mAuth.signOut();
+
+        SharedPref.deleteName(getApplicationContext(), "alune");
 
         Intent intent = new Intent(MenuGeral.this, MainActivity.class);
         startActivity(intent);

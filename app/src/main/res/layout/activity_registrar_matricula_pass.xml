@@ -4,30 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menu.login.registrar.Registrar_2_matricula_pass"
-    android:padding="10dp">
+    android:padding="10dp"
+    tools:context=".menu.login.registrar.Registrar_2_matricula_pass">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            app:srcCompat="@mipmap/ic_launcher_round"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            app:srcCompat="@mipmap/ic_launcher_round" />
 
         <EditText
             android:id="@+id/et_matricula"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:ems="10"
             android:hint="Matrícula"
-            android:layout_marginTop="20dp"
-            android:maxLength="8"
-            android:inputType="number"/>
+            android:inputType="number"
+            android:maxLength="8" />
 
         <EditText
             android:id="@+id/et_senha"
@@ -36,7 +36,7 @@
             android:ems="10"
             android:hint="Senha"
             android:inputType="textPersonName|textPassword"
-            android:maxLength="20"/>
+            android:maxLength="20" />
 
         <EditText
             android:id="@+id/et_senha2"
@@ -45,26 +45,27 @@
             android:ems="10"
             android:hint="Repita a senha"
             android:inputType="textPersonName|textPassword"
-            android:maxLength="20"/>
+            android:maxLength="20" />
 
         <TextView
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:textColor="#000"
-            android:text="Bem vindo a Tolaria! Para garantir que você é um estudante, precisamos de um Atestado de matrícula recente em seu nome:"/>
+            android:text="Bem vindo a Tolaria! Para garantir que você é um estudante, precisamos de um Atestado de matrícula recente em seu nome:"
+            android:textColor="#000" />
 
         <Button
             android:id="@+id/bt_pdf"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Escolher PDF"/>
+            android:layout_marginTop="10dp"
+            android:text="Escolher PDF" />
+
         <TextView
             android:id="@+id/tv_pdf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#000"/>
+            android:textColor="#000" />
 
     </LinearLayout>
 
@@ -73,6 +74,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>

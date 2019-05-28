@@ -4,85 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menu.login.registrar.Register_2"
-    android:background="@color/alune_gray">
+    android:background="@color/alune_gray"
+    tools:context=".menu.login.registrar.Register_2">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_marginTop="10dp">
+
             <FrameLayout
                 android:id="@+id/fl_picture"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 android:layout_centerInParent="true">
+
                 <ImageView
                     android:id="@+id/iv_profile"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
-                    app:srcCompat="@drawable/ic_default_user"
-                    android:layout_gravity="center"/>
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_default_user" />
             </FrameLayout>
+
             <ImageView
                 android:id="@+id/iv_camera"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                app:srcCompat="@drawable/ic_photo"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"/>
+                app:srcCompat="@drawable/ic_photo" />
+
             <ImageView
                 android:id="@+id/x"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:padding="2dp"
-                app:srcCompat="@drawable/ic_x"
-                android:layout_alignParentBottom="true"
                 android:layout_alignParentStart="true"
-                android:visibility="invisible"/>
+                android:layout_alignParentBottom="true"
+                android:padding="2dp"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_x" />
         </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
             android:text="Este é seu ultimo passo para ser Alune!\nPara conhecermos você melhor, diga-nos seu nome, e, se quiser, adicione uma foto em seu perfil."
             android:textColor="@color/colorPrimary"
-            android:textSize="18sp"/>
+            android:textSize="18sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/et_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="13"
+                android:layout_gravity="center"
                 android:background="@drawable/edit_border"
-                android:padding="5dp"
+                android:ems="13"
                 android:hint="Nome completo"
                 android:inputType="textCapWords"
-                android:layout_gravity="center"/>
+                android:padding="5dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
+
                 <CheckBox
                     android:id="@+id/cb_terms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Eu li e concordo com os "/>
+                    android:text="Eu li e concordo com os " />
+
                 <TextView
                     android:id="@+id/tv_terms"
                     android:layout_width="wrap_content"
@@ -97,11 +103,11 @@
             android:id="@+id/registrar"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/rounded_button_primary"
             android:text="Registrar!"
-            android:textColor="#fff"
-            android:layout_marginTop="20dp"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:textColor="#fff" />
     </LinearLayout>
 
     <ProgressBar
@@ -109,6 +115,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>
